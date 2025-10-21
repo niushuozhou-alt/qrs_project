@@ -8,5 +8,9 @@ Qrs_project/
 
 ├── 4_STM32_Interrupt_led/          # 四：中断点灯
 
+├── 5_serial_connection/               # 五：串口通信
+
+├── 6_timerandpwm/                      # 六：定时器与PWM
+
 └── README.md
 
