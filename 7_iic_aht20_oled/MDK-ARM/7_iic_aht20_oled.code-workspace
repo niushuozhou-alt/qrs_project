@@ -4,6 +4,10 @@
             "path": "."
         }
     ],
-    "settings": {},
+    "settings": {
+        "files.associations": {
+            "aht20.h": "c"
+        }
+    },
     "extensions": {}
 }
