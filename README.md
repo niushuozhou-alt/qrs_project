@@ -12,5 +12,7 @@ Qrs_project/
 
 ├── 6_timerandpwm/                      # 六：定时器与PWM
 
+├── 7_iic_aht20_oled/                     # 七：i2c
+
 └── README.md
 
