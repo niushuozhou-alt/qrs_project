@@ -11,17 +11,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "aht20.h"
 
-/* Private function prototypes -----------------------------------------------*/
+/* 私有函数原型 -----------------------------------------------*/
 static HAL_StatusTypeDef AHT20_WriteCommand(AHT20_HandleTypeDef *aht20, uint8_t cmd);
 static HAL_StatusTypeDef AHT20_WriteCommandWithParams(AHT20_HandleTypeDef *aht20, uint8_t cmd, uint8_t param1, uint8_t param2);
 
-/* Exported functions --------------------------------------------------------*/
+/* 导出函数 --------------------------------------------------------*/
 
 /**
-  * @brief  Initialize AHT20 sensor
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @param  hi2c: Pointer to I2C handle
-  * @retval HAL status
+  * @brief  初始化AHT20传感器
+  * @param  aht20: AHT20句柄结构体指针
+  * @param  hi2c: I2C句柄指针
+  * @retval HAL状态
   */
 HAL_StatusTypeDef AHT20_Init(AHT20_HandleTypeDef *aht20, I2C_HandleTypeDef *hi2c)
 {
@@ -29,50 +29,50 @@ HAL_StatusTypeDef AHT20_Init(AHT20_HandleTypeDef *aht20, I2C_HandleTypeDef *hi2c
         return HAL_ERROR;
     }
 
-    // Initialize handle structure
+    // 初始化句柄结构体
     aht20->hi2c = hi2c;
     aht20->deviceAddress = AHT20_DEFAULT_ADDRESS;
     aht20->measurementStarted = 0;
 
-    // Wait 40 ms after power-on before reading temp or humidity. Datasheet pg 8
+    // 上电后等待40ms再读取温湿度，数据手册第8页
     HAL_Delay(AHT20_POWER_ON_DELAY_MS);
 
-    // Check if connected
+    // 检查连接状态
     if (AHT20_IsConnected(aht20) == 0) {
         return HAL_ERROR;
     }
 
-    // Read status for debugging
+    // 读取状态用于调试
     uint8_t status = AHT20_GetStatus(aht20);
 
-    // Check if the calibrated bit is set. If not, init the sensor.
+    // 检查校准位是否设置，如果没有则初始化传感器
     if ((status & AHT20_STATUS_CALIBRATED) == 0) {
-        // Send 0xBE0800
+        // 发送初始化命令 0xBE0800
         if (AHT20_Initialize(aht20) != HAL_OK) {
             return HAL_ERROR;
         }
 
-        HAL_Delay(AHT20_CALIB_DELAY_MS); // Wait for calibration to complete
+        HAL_Delay(AHT20_CALIB_DELAY_MS); // 等待校准完成
 
-        // Immediately trigger a measurement. Send 0xAC3300
+        // 立即触发测量，发送命令 0xAC3300
         if (AHT20_TriggerMeasurement(aht20) != HAL_OK) {
             return HAL_ERROR;
         }
 
-        HAL_Delay(AHT20_MEAS_DELAY_MS); // Wait for measurement to complete
+        HAL_Delay(AHT20_MEAS_DELAY_MS); // 等待测量完成
 
         uint8_t counter = 0;
         while (AHT20_IsBusy(aht20)) {
             HAL_Delay(AHT20_BUSY_RETRY_MS);
             if (counter++ > (AHT20_BUSY_TIMEOUT_MS / AHT20_BUSY_RETRY_MS)) {
-                return HAL_ERROR; // Give up after 100ms
+                return HAL_ERROR; // 100ms后放弃
             }
         }
 
-        // Read data to complete calibration sequence
+        // 读取数据以完成校准序列
         AHT20_ReadData(aht20);
 
-        // Wait a bit more and check calibration status again
+        // 再等待一下并重新检查校准状态
         HAL_Delay(10);
         status = AHT20_GetStatus(aht20);
         if ((status & AHT20_STATUS_CALIBRATED) == 0) {
@@ -80,7 +80,7 @@ HAL_StatusTypeDef AHT20_Init(AHT20_HandleTypeDef *aht20, I2C_HandleTypeDef *hi2c
         }
     }
 
-    // Mark all datums as fresh (not read before)
+    // 将所有数据标记为新鲜（之前未读取过）
     aht20->sensorQueried.temperature = 0;
     aht20->sensorQueried.humidity = 0;
 
@@ -88,9 +88,9 @@ HAL_StatusTypeDef AHT20_Init(AHT20_HandleTypeDef *aht20, I2C_HandleTypeDef *hi2c
 }
 
 /**
-  * @brief  Check if AHT20 is connected to I2C bus
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval 1 if connected, 0 if not connected
+  * @brief  检查AHT20是否连接到I2C总线
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 1表示已连接，0表示未连接
   */
 uint8_t AHT20_IsConnected(AHT20_HandleTypeDef *aht20)
 {
@@ -98,14 +98,14 @@ uint8_t AHT20_IsConnected(AHT20_HandleTypeDef *aht20)
         return 0;
     }
 
-    // Try to communicate with device
+    // 尝试与设备通信
     HAL_StatusTypeDef status = HAL_I2C_IsDeviceReady(aht20->hi2c, aht20->deviceAddress, 3, HAL_MAX_DELAY);
     if (status == HAL_OK) {
         return 1;
     }
 
-    // If IC failed to respond, give it 20ms more for Power On Startup
-    // Datasheet pg 7
+    // 如果IC未响应，给20ms额外时间用于上电启动
+    // 数据手册第7页
     HAL_Delay(AHT20_RESET_DELAY_MS);
 
     status = HAL_I2C_IsDeviceReady(aht20->hi2c, aht20->deviceAddress, 3, HAL_MAX_DELAY);
@@ -117,9 +117,9 @@ uint8_t AHT20_IsConnected(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Check if new data is available
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval 1 if new data available, 0 if not ready
+  * @brief  检查是否有新数据可用
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 1表示有新数据，0表示未就绪
   */
 uint8_t AHT20_Available(AHT20_HandleTypeDef *aht20)
 {
@@ -143,9 +143,9 @@ uint8_t AHT20_Available(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Get status byte from AHT20
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval Status byte
+  * @brief  从AHT20获取状态字节
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 状态字节
   */
 uint8_t AHT20_GetStatus(AHT20_HandleTypeDef *aht20)
 {
@@ -154,8 +154,8 @@ uint8_t AHT20_GetStatus(AHT20_HandleTypeDef *aht20)
     }
 
     uint8_t status = 0;
-    // Try both read addresses: 0x38 (write) and 0x39 (read)
-    // AHT20 uses 0x38 for write, 0x39 for read
+    // 使用读地址：写地址0x70，读地址0x71
+    // AHT20使用0x70写，0x71读
     HAL_StatusTypeDef result = HAL_I2C_Master_Receive(aht20->hi2c, aht20->deviceAddress + 1, &status, 1, HAL_MAX_DELAY);
     if (result != HAL_OK) {
         return 0;
@@ -164,9 +164,9 @@ uint8_t AHT20_GetStatus(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Check if AHT20 is calibrated
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval 1 if calibrated, 0 if not calibrated
+  * @brief  检查AHT20是否已校准
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 1表示已校准，0表示未校准
   */
 uint8_t AHT20_IsCalibrated(AHT20_HandleTypeDef *aht20)
 {
@@ -174,9 +174,9 @@ uint8_t AHT20_IsCalibrated(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Check if AHT20 is busy
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval 1 if busy, 0 if ready
+  * @brief  检查AHT20是否忙碌
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 1表示忙碌，0表示就绪
   */
 uint8_t AHT20_IsBusy(AHT20_HandleTypeDef *aht20)
 {
@@ -184,9 +184,9 @@ uint8_t AHT20_IsBusy(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Initialize AHT20 sensor
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval HAL status
+  * @brief  初始化AHT20传感器
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval HAL状态
   */
 HAL_StatusTypeDef AHT20_Initialize(AHT20_HandleTypeDef *aht20)
 {
@@ -194,9 +194,9 @@ HAL_StatusTypeDef AHT20_Initialize(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Trigger measurement
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval HAL status
+  * @brief  触发测量
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval HAL状态
   */
 HAL_StatusTypeDef AHT20_TriggerMeasurement(AHT20_HandleTypeDef *aht20)
 {
@@ -204,9 +204,9 @@ HAL_StatusTypeDef AHT20_TriggerMeasurement(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Read and parse the 6 bytes of data into raw humidity and temperature
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval None
+  * @brief  读取并解析6字节数据为原始湿度和温度数据
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 无
   */
 void AHT20_ReadData(AHT20_HandleTypeDef *aht20)
 {
@@ -214,12 +214,12 @@ void AHT20_ReadData(AHT20_HandleTypeDef *aht20)
         return;
     }
 
-    // Clear previous data
+    // 清除之前的数据
     aht20->sensorData.temperature = 0;
     aht20->sensorData.humidity = 0;
 
     uint8_t buffer[6] = {0};
-    // Use read address (0x39) for receiving data
+    // 使用读地址（0x71）接收数据
     HAL_StatusTypeDef result = HAL_I2C_Master_Receive(aht20->hi2c, aht20->deviceAddress + 1, buffer, 6, HAL_MAX_DELAY);
 
     if (result != HAL_OK) {
@@ -240,18 +240,18 @@ void AHT20_ReadData(AHT20_HandleTypeDef *aht20)
     aht20->sensorData.temperature |= (uint32_t)buffer[4] << (8 * 1);
     aht20->sensorData.temperature |= (uint32_t)buffer[5] << (8 * 0);
 
-    // Need to get rid of data in bits > 20
+    // 去除大于20位的数据
     aht20->sensorData.temperature = aht20->sensorData.temperature & ~(0xFFF00000);
 
-    // Mark data as fresh
+    // 标记数据为新鲜
     aht20->sensorQueried.temperature = 0;
     aht20->sensorQueried.humidity = 0;
 }
 
 /**
-  * @brief  Perform soft reset of AHT20 sensor
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval HAL status
+  * @brief  执行AHT20传感器软复位
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval HAL状态
   */
 HAL_StatusTypeDef AHT20_SoftReset(AHT20_HandleTypeDef *aht20)
 {
@@ -259,86 +259,86 @@ HAL_StatusTypeDef AHT20_SoftReset(AHT20_HandleTypeDef *aht20)
 }
 
 /**
-  * @brief  Get temperature measurement
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval Temperature in degrees Celsius
+  * @brief  获取温度测量值
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 摄氏温度值
   */
 float AHT20_GetTemperature(AHT20_HandleTypeDef *aht20)
 {
     if (aht20 == NULL) {
-        return -999.0f; // Error value
+        return -999.0f; // 错误值
     }
 
     if (aht20->sensorQueried.temperature == 1) {
-        // We've got old data so trigger new measurement
+        // 如果数据已过期，触发新测量
         AHT20_TriggerMeasurement(aht20);
 
-        HAL_Delay(AHT20_MEAS_DELAY_MS); // Wait for measurement to complete
+        HAL_Delay(AHT20_MEAS_DELAY_MS); // 等待测量完成
 
         uint8_t counter = 0;
         while (AHT20_IsBusy(aht20)) {
             HAL_Delay(AHT20_BUSY_RETRY_MS);
             if (counter++ > (AHT20_BUSY_TIMEOUT_MS / AHT20_BUSY_RETRY_MS)) {
-                return -999.0f; // Give up after 100ms
+                return -999.0f; // 100ms后放弃
             }
         }
 
         AHT20_ReadData(aht20);
     }
 
-    // From datasheet pg 8
+    // 根据数据手册第8页的公式
     float tempCelsius = ((float)aht20->sensorData.temperature / 1048576) * 200 - 50;
 
-    // Mark data as old
+    // 标记数据为过期
     aht20->sensorQueried.temperature = 1;
 
     return tempCelsius;
 }
 
 /**
-  * @brief  Get humidity measurement
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @retval Humidity in %RH
+  * @brief  获取湿度测量值
+  * @param  aht20: AHT20句柄结构体指针
+  * @retval 相对湿度值 %RH
   */
 float AHT20_GetHumidity(AHT20_HandleTypeDef *aht20)
 {
     if (aht20 == NULL) {
-        return -999.0f; // Error value
+        return -999.0f; // 错误值
     }
 
     if (aht20->sensorQueried.humidity == 1) {
-        // We've got old data so trigger new measurement
+        // 如果数据已过期，触发新测量
         AHT20_TriggerMeasurement(aht20);
 
-        HAL_Delay(AHT20_MEAS_DELAY_MS); // Wait for measurement to complete
+        HAL_Delay(AHT20_MEAS_DELAY_MS); // 等待测量完成
 
         uint8_t counter = 0;
         while (AHT20_IsBusy(aht20)) {
             HAL_Delay(AHT20_BUSY_RETRY_MS);
             if (counter++ > (AHT20_BUSY_TIMEOUT_MS / AHT20_BUSY_RETRY_MS)) {
-                return -999.0f; // Give up after 100ms
+                return -999.0f; // 100ms后放弃
             }
         }
 
         AHT20_ReadData(aht20);
     }
 
-    // From datasheet pg 8
+    // 根据数据手册第8页的公式
     float relHumidity = ((float)aht20->sensorData.humidity / 1048576) * 100;
 
-    // Mark data as old
+    // 标记数据为过期
     aht20->sensorQueried.humidity = 1;
 
     return relHumidity;
 }
 
-/* Private functions ---------------------------------------------------------*/
+/* 私有函数 ---------------------------------------------------------*/
 
 /**
-  * @brief  Write single command to AHT20
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @param  cmd: Command byte
-  * @retval HAL status
+  * @brief  向AHT20写入单个命令
+  * @param  aht20: AHT20句柄结构体指针
+  * @param  cmd: 命令字节
+  * @retval HAL状态
   */
 static HAL_StatusTypeDef AHT20_WriteCommand(AHT20_HandleTypeDef *aht20, uint8_t cmd)
 {
@@ -350,12 +350,12 @@ static HAL_StatusTypeDef AHT20_WriteCommand(AHT20_HandleTypeDef *aht20, uint8_t 
 }
 
 /**
-  * @brief  Write command with parameters to AHT20
-  * @param  aht20: Pointer to AHT20 handle structure
-  * @param  cmd: Command byte
-  * @param  param1: First parameter byte
-  * @param  param2: Second parameter byte
-  * @retval HAL status
+  * @brief  向AHT20写入带参数的命令
+  * @param  aht20: AHT20句柄结构体指针
+  * @param  cmd: 命令字节
+  * @param  param1: 第一个参数字节
+  * @param  param2: 第二个参数字节
+  * @retval HAL状态
   */
 static HAL_StatusTypeDef AHT20_WriteCommandWithParams(AHT20_HandleTypeDef *aht20, uint8_t cmd, uint8_t param1, uint8_t param2)
 {

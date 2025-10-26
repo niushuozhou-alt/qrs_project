@@ -22,46 +22,46 @@
 #include "usart.h"
 #include "gpio.h"
 
-/* Private includes ----------------------------------------------------------*/
+/* 私有包含文件 ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "aht20.h"
 #include <string.h>
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
+/* 私有类型定义 -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
 
-/* Private define ------------------------------------------------------------*/
+/* 私有定义 ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
 /* USER CODE END PD */
 
-/* Private macro -------------------------------------------------------------*/
+/* 私有宏 -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */
 
-/* Private variables ---------------------------------------------------------*/
+/* 私有变量 ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-AHT20_HandleTypeDef aht20;
-char uart_buffer[100];
+AHT20_HandleTypeDef aht20;  // AHT20传感器句柄
+char uart_buffer[100];      // UART发送缓冲区
 /* USER CODE END PV */
 
-/* Private function prototypes -----------------------------------------------*/
+/* 私有函数原型 -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
+/* 私有用户代码 ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
+  * @brief  应用程序入口点
   * @retval int
   */
 int main(void)
@@ -71,67 +71,67 @@ int main(void)
 
   /* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+  /* MCU配置--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  /* 复位所有外设，初始化Flash接口和Systick */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
-  /* Configure the system clock */
+  /* 配置系统时钟 */
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
+  /* 初始化所有配置的外设 */
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  // Small delay to ensure UART is fully initialized
+
+  // 小延时确保UART完全初始化
   HAL_Delay(100);
 
-  // Test UART transmission with error checking
+  // 测试UART发送并检查错误
   uint8_t ret[] = "helloworld!\r\n";
   HAL_StatusTypeDef uart_status = HAL_UART_Transmit(&huart1, ret, strlen((char*)ret), 1000);
 
-
-  // Initialize AHT20 sensor
+  // 初始化AHT20传感器
   if (AHT20_Init(&aht20, &hi2c1) != HAL_OK) {
-      uint8_t msg1[] = "AHT20 initialization failed!\r\n";
+      uint8_t msg1[] = "AHT20初始化失败!\r\n";
       HAL_UART_Transmit(&huart1, msg1, strlen((char*)msg1), 1000);
-      while(1); // Stop if initialization fails
+      while(1); // 初始化失败时停止程序
   } else {
-      uint8_t msg2[] = "AHT20 sensor ready!\r\n";
+      uint8_t msg2[] = "AHT20传感器就绪!\r\n";
       HAL_UART_Transmit(&huart1, msg2, strlen((char*)msg2), 1000);
   }
   /* USER CODE END 2 */
 
-  /* Infinite loop */
+  /* 无限循环 */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // Read AHT20 sensor data
+    // 读取AHT20传感器数据
     float temperature = AHT20_GetTemperature(&aht20);
     float humidity = AHT20_GetHumidity(&aht20);
 
-    // Check if readings are valid
+    // 检查读数是否有效
     if (temperature > -500.0f && humidity > 0.0f) {
-        // Format and send sensor data via UART
+        // 格式化并通过UART发送传感器数据
         int len = snprintf(uart_buffer, sizeof(uart_buffer),
                           "Temp: %.1fC, Hum: %.1f%%\r\n",
                           temperature, humidity);
         HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, len, HAL_MAX_DELAY);
     }
 
-    // Delay 2 seconds between readings
+    // 两次读取间隔2秒
     HAL_Delay(2000);
   }
   /* USER CODE END 3 */

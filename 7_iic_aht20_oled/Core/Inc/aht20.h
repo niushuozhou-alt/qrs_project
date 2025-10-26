@@ -19,57 +19,57 @@ extern "C" {
 #include "main.h"
 #include "i2c.h"
 
-/* Exported defines ------------------------------------------------------------*/
-#define AHT20_DEFAULT_ADDRESS   0x70  // AHT20 I2C address (updated based on scan)
+/* 导出定义 ------------------------------------------------------------*/
+#define AHT20_DEFAULT_ADDRESS   0x70  // AHT20 I2C地址 (基于扫描结果更新)
 
-/* AHT20 Commands */
-#define AHT20_REG_RESET         0xBA  // Soft reset command
-#define AHT20_REG_INITIALIZE    0xBE  // Initialize command
-#define AHT20_REG_MEASURE       0xAC  // Trigger measurement command
+/* AHT20命令 */
+#define AHT20_REG_RESET         0xBA  // 软复位命令
+#define AHT20_REG_INITIALIZE    0xBE  // 初始化命令
+#define AHT20_REG_MEASURE       0xAC  // 触发测量命令
 
-/* AHT20 Status bits */
-#define AHT20_STATUS_BUSY       0x80  // Busy bit (Bit[7])
-#define AHT20_STATUS_CALIBRATED 0x08  // Calibration enable bit (Bit[3])
+/* AHT20状态位 */
+#define AHT20_STATUS_BUSY       0x80  // 忙状态位 (Bit[7])
+#define AHT20_STATUS_CALIBRATED 0x08  // 校准使能位 (Bit[3])
 
-/* AHT20 Timing constants */
-#define AHT20_POWER_ON_DELAY_MS 40    // Power-on delay >= 40ms
-#define AHT20_RESET_DELAY_MS   20     // Soft reset delay <= 20ms
-#define AHT20_CALIB_DELAY_MS   10     // Calibration delay 10ms
-#define AHT20_MEAS_DELAY_MS    75     // Measurement delay 75ms (from SparkFun)
-#define AHT20_BUSY_RETRY_MS    1      // Retry delay when sensor is busy
-#define AHT20_BUSY_TIMEOUT_MS  100    // Timeout for busy wait
+/* AHT20时序常量 */
+#define AHT20_POWER_ON_DELAY_MS 40    // 上电延时 >= 40ms
+#define AHT20_RESET_DELAY_MS   20     // 软复位延时 <= 20ms
+#define AHT20_CALIB_DELAY_MS   10     // 校准延时 10ms
+#define AHT20_MEAS_DELAY_MS    75     // 测量延时 75ms (来自SparkFun)
+#define AHT20_BUSY_RETRY_MS    1      // 传感器忙时重试延时
+#define AHT20_BUSY_TIMEOUT_MS  100    // 忙等待超时时间
 
-/* Exported types --------------------------------------------------------------*/
+/* 导出类型 --------------------------------------------------------------*/
 typedef struct {
-    float temperature;      // Temperature in Celsius
-    float humidity;         // Humidity in %RH
+    float temperature;      // 摄氏温度
+    float humidity;         // 相对湿度 %RH
 } AHT20_Data_t;
 
 typedef struct {
-    uint32_t humidity;      // Raw humidity data (20 bits)
-    uint32_t temperature;   // Raw temperature data (20 bits)
+    uint32_t humidity;      // 原始湿度数据 (20位)
+    uint32_t temperature;   // 原始温度数据 (20位)
 } AHT20_RawData_t;
 
 typedef struct {
-    uint8_t temperature : 1;  // Temperature data freshness flag
-    uint8_t humidity : 1;     // Humidity data freshness flag
+    uint8_t temperature : 1;  // 温度数据新鲜度标志
+    uint8_t humidity : 1;     // 湿度数据新鲜度标志
 } AHT20_DataStatus_t;
 
 typedef struct {
-    I2C_HandleTypeDef *hi2c;     // I2C handle pointer
-    uint8_t deviceAddress;       // Device I2C address
-    uint8_t measurementStarted;  // Measurement state flag
-    AHT20_RawData_t sensorData;  // Raw sensor data
-    AHT20_DataStatus_t sensorQueried; // Data freshness status
+    I2C_HandleTypeDef *hi2c;     // I2C句柄指针
+    uint8_t deviceAddress;       // 设备I2C地址
+    uint8_t measurementStarted;  // 测量状态标志
+    AHT20_RawData_t sensorData;  // 原始传感器数据
+    AHT20_DataStatus_t sensorQueried; // 数据新鲜度状态
 } AHT20_HandleTypeDef;
 
-/* Exported function prototypes ------------------------------------------------*/
-// Device status functions
+/* 导出函数原型 ------------------------------------------------*/
+// 设备状态函数
 HAL_StatusTypeDef AHT20_Init(AHT20_HandleTypeDef *aht20, I2C_HandleTypeDef *hi2c);
 uint8_t AHT20_IsConnected(AHT20_HandleTypeDef *aht20);
 uint8_t AHT20_Available(AHT20_HandleTypeDef *aht20);
 
-// Measurement helper functions
+// 测量辅助函数
 uint8_t AHT20_GetStatus(AHT20_HandleTypeDef *aht20);
 uint8_t AHT20_IsCalibrated(AHT20_HandleTypeDef *aht20);
 uint8_t AHT20_IsBusy(AHT20_HandleTypeDef *aht20);
@@ -78,7 +78,7 @@ HAL_StatusTypeDef AHT20_TriggerMeasurement(AHT20_HandleTypeDef *aht20);
 void AHT20_ReadData(AHT20_HandleTypeDef *aht20);
 HAL_StatusTypeDef AHT20_SoftReset(AHT20_HandleTypeDef *aht20);
 
-// Make measurements
+// 执行测量
 float AHT20_GetTemperature(AHT20_HandleTypeDef *aht20);
 float AHT20_GetHumidity(AHT20_HandleTypeDef *aht20);
 
