@@ -1,0 +1,308 @@
+version: "4.1"
+name: 0.96OLED_I2C
+type: ARM
+deviceName: STM32F103C8
+packDir: .pack/Keil/STM32F1xx_DFP.2.3.0
+srcDirs: []
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders:
+    - name: Application
+      files: []
+      folders:
+        - name: MDK-ARM
+          files:
+            - path: startup_stm32f103xb.s
+          folders: []
+        - name: User
+          files: []
+          folders:
+            - name: Core
+              files:
+                - path: ../Core/Src/main.c
+                - path: ../Core/Src/gpio.c
+                - path: ../Core/Src/i2c.c
+                - path: ../Core/Src/tim.c
+                - path: ../Core/Src/stm32f1xx_it.c
+                - path: ../Core/Src/stm32f1xx_hal_msp.c
+              folders: []
+    - name: Drivers
+      files: []
+      folders:
+        - name: STM32F1xx_HAL_Driver
+          files:
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c
+            - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c
+          folders: []
+        - name: CMSIS
+          files:
+            - path: ../Core/Src/system_stm32f1xx.c
+          folders: []
+    - name: HARDWARE
+      files:
+        - path: ../HARDWARE/stm32_u8g2.c
+        - path: ../HARDWARE/test.c
+      folders: []
+    - name: U8g2
+      files:
+        - path: ../csrc/mui.c
+        - path: ../csrc/mui_u8g2.c
+        - path: ../csrc/u8g2_bitmap.c
+        - path: ../csrc/u8g2_box.c
+        - path: ../csrc/u8g2_buffer.c
+        - path: ../csrc/u8g2_button.c
+        - path: ../csrc/u8g2_circle.c
+        - path: ../csrc/u8g2_cleardisplay.c
+        - path: ../csrc/u8g2_d_memory.c
+        - path: ../csrc/u8g2_d_setup.c
+        - path: ../csrc/u8g2_font.c
+        - path: ../csrc/u8g2_fonts.c
+        - path: ../csrc/u8g2_hvline.c
+        - path: ../csrc/u8g2_input_value.c
+        - path: ../csrc/u8g2_intersection.c
+        - path: ../csrc/u8g2_kerning.c
+        - path: ../csrc/u8g2_line.c
+        - path: ../csrc/u8g2_ll_hvline.c
+        - path: ../csrc/u8g2_message.c
+        - path: ../csrc/u8g2_polygon.c
+        - path: ../csrc/u8g2_selection_list.c
+        - path: ../csrc/u8g2_setup.c
+        - path: ../csrc/u8log.c
+        - path: ../csrc/u8log_u8g2.c
+        - path: ../csrc/u8log_u8x8.c
+        - path: ../csrc/u8x8_8x8.c
+        - path: ../csrc/u8x8_byte.c
+        - path: ../csrc/u8x8_cad.c
+        - path: ../csrc/u8x8_capture.c
+        - path: ../csrc/u8x8_d_a2printer.c
+        - path: ../csrc/u8x8_d_gp1247ai.c
+        - path: ../csrc/u8x8_d_gp1287ai.c
+        - path: ../csrc/u8x8_d_gu800.c
+        - path: ../csrc/u8x8_d_hd44102.c
+        - path: ../csrc/u8x8_d_ssd1306_128x64_noname.c
+        - path: ../csrc/u8x8_d_stdio.c
+        - path: ../csrc/u8x8_d_t6963.c
+        - path: ../csrc/u8x8_d_uc1601.c
+        - path: ../csrc/u8x8_d_uc1604.c
+        - path: ../csrc/u8x8_d_uc1608.c
+        - path: ../csrc/u8x8_d_uc1609.c
+        - path: ../csrc/u8x8_d_uc1610.c
+        - path: ../csrc/u8x8_d_uc1611.c
+        - path: ../csrc/u8x8_d_uc1617.c
+        - path: ../csrc/u8x8_d_uc1638.c
+        - path: ../csrc/u8x8_d_uc1701_dogs102.c
+        - path: ../csrc/u8x8_d_uc1701_mini12864.c
+        - path: ../csrc/u8x8_debounce.c
+        - path: ../csrc/u8x8_display.c
+        - path: ../csrc/u8x8_fonts.c
+        - path: ../csrc/u8x8_gpio.c
+        - path: ../csrc/u8x8_input_value.c
+        - path: ../csrc/u8x8_message.c
+        - path: ../csrc/u8x8_selection_list.c
+        - path: ../csrc/u8x8_setup.c
+        - path: ../csrc/u8x8_string.c
+        - path: ../csrc/u8x8_u8toa.c
+        - path: ../csrc/u8x8_u16toa.c
+      folders: []
+    - name: ::CMSIS
+      files: []
+      folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: 9802738807a71c99ff6155bf5bd1b247
+targets:
+  0.96OLED_I2C:
+    cppPreprocessAttrs:
+      defineList:
+        - USE_HAL_DRIVER
+        - STM32F103xB
+        - STM32F10X_MD
+      incList:
+        - .
+        - ../Core/Inc
+        - ../Drivers/STM32F1xx_HAL_Driver/Inc
+        - ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy
+        - ../Drivers/CMSIS/Device/ST/STM32F1xx/Include
+        - ../Drivers/CMSIS/Include
+        - ../HARDWARE
+        - ../csrc
+        - .cmsis/include
+        - RTE/_0.96OLED_I2C
+      libList: []
+    excludeList: []
+    toolchain: AC5
+    toolchainConfigMap:
+      AC5:
+        archExtensions: ""
+        cpuType: Cortex-M3
+        floatingPointHardware: none
+        options:
+          version: 4
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            CXX_FLAGS: --diag_suppress=1 --diag_suppress=1295
+            C_FLAGS: --diag_suppress=1 --diag_suppress=1295
+            c99-mode: true
+            one-elf-section-per-function: true
+            optimization: level-3
+            warnings: all-warnings
+          global:
+            output-debug-info: enable
+            use-microLIB: false
+          linker:
+            $outputTaskExcludes:
+              - .bin
+            output-format: elf
+            ro-base: ""
+            rw-base: ""
+            xo-base: ""
+        scatterFilePath: ""
+        storageLayout:
+          RAM:
+            - id: 1
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 2
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 3
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 1
+              isChecked: true
+              mem:
+                size: "0x5000"
+                startAddr: "0x20000000"
+              noInit: false
+              tag: IRAM
+            - id: 2
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: IRAM
+          ROM:
+            - id: 1
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 2
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 3
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 1
+              isChecked: true
+              isStartup: true
+              mem:
+                size: "0x10000"
+                startAddr: "0x8000000"
+              tag: IROM
+            - id: 2
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: IROM
+        useCustomScatterFile: false
+      AC6:
+        archExtensions: ""
+        cpuType: Cortex-M3
+        floatingPointHardware: none
+        options:
+          version: 3
+          afterBuildTasks: []
+          asm-compiler:
+            $use: asm-auto
+            misc-controls: ""
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c99
+            language-cpp: c++11
+            link-time-optimization: false
+            optimization: level-0
+          global:
+            output-debug-info: enable
+            use-microLIB: false
+          linker:
+            $outputTaskExcludes:
+              - .bin
+            misc-controls: --diag_suppress=L6329
+            output-format: elf
+        scatterFilePath: <YOUR_SCATTER_FILE>.sct
+        storageLayout:
+          RAM:
+            - id: 1
+              isChecked: true
+              mem:
+                size: "0x00005000"
+                startAddr: "0x20000000"
+              noInit: false
+              tag: IRAM
+          ROM:
+            - id: 1
+              isChecked: true
+              isStartup: true
+              mem:
+                size: "0x00010000"
+                startAddr: "0x08000000"
+              tag: IROM
+        useCustomScatterFile: false
+    uploadConfigMap:
+      JLink:
+        baseAddr: ""
+        bin: ""
+        cpuInfo:
+          cpuName: "null"
+          vendor: "null"
+        otherCmds: ""
+        proType: 1
+        speed: 8000
+      OpenOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        interface: cmsis-dap-v1
+        target: stm32f1x
+    uploader: OpenOCD

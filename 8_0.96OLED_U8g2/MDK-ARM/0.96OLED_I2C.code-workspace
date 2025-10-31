@@ -1,0 +1,14 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "tim.h": "c",
+            "stm32_u8g2.h": "c"
+        }
+    },
+    "extensions": {}
+}
