@@ -14,5 +14,7 @@ Qrs_project/
 
 ├── 7_iic_aht20_oled/                     # 七：i2c
 
+├── 8_0.96OLED_U8g2		     # 八：U8g2_OLED
+
 └── README.md
 
