@@ -1,0 +1,6 @@
+9_us_os\lib_ascii.o: ..\UCOSIII\uC-LIB\lib_ascii.c
+9_us_os\lib_ascii.o: ..\UCOSIII\uC-LIB\lib_ascii.h
+9_us_os\lib_ascii.o: ..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView\cpu.h
+9_us_os\lib_ascii.o: ..\UCOSIII\uC-CPU\cpu_def.h
+9_us_os\lib_ascii.o: ..\Core\Src\OS\cpu_cfg.h
+9_us_os\lib_ascii.o: ..\UCOSIII\uC-LIB\lib_def.h

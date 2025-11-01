@@ -1,0 +1,242 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: niu NSZ, niu, LIC=ATTQ1-C6PWT-308NC-7M16C-K0DQW-Q2N2W
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
+Toolchain Path:  D:\keil5-stm32.51\Keil5 MDK\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+E:\STM32TESTPROJECT\Qrs_project\9_us_os\MDK-ARM\9_us_os.uvprojx
+Project File Date:  11/01/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5-stm32.51\Keil5 MDK\ARM\ARMCC\Bin'
+Rebuild target '9_us_os'
+assembling startup_stm32f103xb.s...
+compiling stm32f1xx_hal_msp.c...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_it.c...
+compiling gpio.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling usart.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+compiling stm32f1xx_hal_dma.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling main.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+../Core/Src/main.c: 2 warnings, 0 errors
+assembling cpu_a.asm...
+compiling stm32f1xx_hal_uart.c...
+compiling cpu_core.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uC-CPU\cpu_core.c: 2 warnings, 0 errors
+compiling lib_math.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uC-LIB\lib_math.c: 2 warnings, 0 errors
+compiling lib_ascii.c...
+compiling cpu_c.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView\cpu_c.c: 2 warnings, 0 errors
+assembling lib_mem_a.asm...
+assembling os_cpu_a.asm...
+compiling lib_str.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\UCOSIII\uC-LIB\lib_str.c: 1 warning, 0 errors
+compiling lib_mem.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uC-LIB\lib_mem.c: 2 warnings, 0 errors
+compiling os_cpu_c.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_c.c: 2 warnings, 0 errors
+compiling os_cfg_app.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_cfg_app.c: 2 warnings, 0 errors
+compiling os_dbg.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_dbg.c: 2 warnings, 0 errors
+compiling os_int.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_int.c: 2 warnings, 0 errors
+compiling os_mem.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_mem.c: 2 warnings, 0 errors
+compiling os_msg.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_msg.c: 2 warnings, 0 errors
+compiling os_core.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_core.c: 2 warnings, 0 errors
+compiling os_flag.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_flag.c: 2 warnings, 0 errors
+compiling os_prio.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_prio.c: 2 warnings, 0 errors
+compiling os_pend_multi.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_pend_multi.c: 2 warnings, 0 errors
+compiling os_mutex.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_mutex.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_flash.c...
+compiling os_q.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_q.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_exti.c...
+compiling os_stat.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_stat.c: 2 warnings, 0 errors
+compiling os_tick.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_tick.c: 2 warnings, 0 errors
+compiling os_time.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_time.c: 2 warnings, 0 errors
+compiling os_var.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_var.c: 2 warnings, 0 errors
+compiling os_sem.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_sem.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_flash_ex.c...
+compiling os_tmr.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_tmr.c: 2 warnings, 0 errors
+compiling os_app_hooks.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\Core\Src\OS\os_app_hooks.c: 2 warnings, 0 errors
+compiling os_task.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\UCOSIII\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
+compiling system_stm32f1xx.c...
+compiling bsp.c...
+..\Core\Src\OS\lib_cfg.h(124): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 47)
+  #define  LIB_MEM_CFG_HEAP_SIZE          5u * 1024u     /* Configure heap memory size         [see Note #2a].           */
+..\Core\Src\OS\lib_cfg.h(47): warning:  #47-D: incompatible redefinition of macro "LIB_MEM_CFG_HEAP_SIZE"  (declared at line 124)
+  #define  LIB_MEM_CFG_HEAP_SIZE          10u * 1024u
+..\Core\Src\OS\bsp.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=18268 RO-data=424 RW-data=288 ZI-data=19776  
+FromELF: creating hex file...
+"9_us_os\9_us_os.axf" - 0 Error(s), 53 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM::CMSIS@6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.2.0.pack
+                Keil::STM32F1xx_DFP@2.2.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_9_us_os
+  D:/keil5-stm32.51/Keil5 MDK/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  D:/keil5-stm32.51/Keil5 MDK/ARM/PACK/Keil/STM32F1xx_DFP/2.2.0/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.1.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:04
+</pre>
+</body>
+</html>
